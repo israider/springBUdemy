@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>[[#{modifica.persona.titulo}]]</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<header th:replace="layout/plantilla :: header"/>
+	<h2>[[#{modifica.persona.titulo}]]</h2>
+	<a th:href="@{/}">[[#{modifica.persona.regresar}]]</a>
+	<br />
+	<hr />
+	<br />
+	<form th:action="@{/guardar}" method="post" th:object="${persona}">
+		<input type="hidden" name="id" th:field="*{id}">
+		<div>
+			<label for="nombre">[[#{persona.nombre}]]: </label>
+			<input type="text" name="cnombre" th:field="*{cnombre}"/>
+			<span th:if="${#fields.hasErrors('cnombre')}" th:errors="*{cnombre}">Error Nombre</span>
+		</div>
+		<div>
+			<label for="apaterno">[[#{persona.appaterno}]]: </label>
+			<input type="text" name="capellidop" th:field="*{capellidop}" />
+			<span th:if="${#fields.hasErrors('capellidop')}" th:errors="*{capellidop}">Error Apellido Paterno</span>
+		</div>
+		<div>
+			<label for="amaterno">[[#{persona.apmaterno}]]: </label>
+			<input type="text" name="capellidom" th:field="*{capellidom}" />
+			<span th:if="${#fields.hasErrors('capellidom')}" th:errors="*{capellidom}">Error Apellido Materno</span>
+		</div>
+		<div>
+			<label for="telefono">[[#{persona.tel}]]: </label>
+			<input type="tel" name="ctel" th:field="*{ctel}" />
+			<span th:if="${#fields.hasErrors('ctel')}" th:errors="*{ctel}">Error telefono</span>
+		</div>
+		<div>
+			<label for="email">[[#{persona.email}]]: </label>
+			<input type="text" name="cemail" th:field="*{cemail}" />
+			<span th:if="${#fields.hasErrors('cemail')}" th:errors="*{cemail}">Error correo electrónico</span>
+		</div>
+		
+		<br />
+		<div>
+			<input type="submit" th:value="#{modifica.persona.guardar}" name="guardar"/>
+		</div>
+	</form>
+	<br />
+	<hr />
+	<br />
+	<footer th:replace="layout/plantilla :: footer"/>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title> [[#{index.titulo}]]</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<header th:replace="layout/plantilla :: header" />
+	<hr />
+	<br />
+	<a th:href="@{/agregar}">[[#{persona.accion.agrega}]]</a>
+	<br />
+	<br />
+	<div th:if="${personas != null  and !personas.empty}">
+		<table border="1px">
+			<thead>
+				<th>[[#{persona.id}]]</th>
+				<th>[[#{persona.nombre}]]</th>
+				<th>[[#{persona.appaterno}]]</th>
+				<th>[[#{persona.apmaterno}]]</th>
+				<th>[[#{persona.email}]]</th>
+				<th>[[#{persona.tel}]]</th>
+				<th>[[#{persona.edita}]]</th>
+				<th>[[#{persona.elimina}]]</th>
+			</thead>
+			<tr th:each="persona:${personas}">
+				<td th:text="${persona.id}"></td>
+				<td th:text="${persona.cnombre}"></td>
+				<td th:text="${persona.capellidop}"></td>
+				<td th:text="${persona.capellidom}"></td>
+				<td th:text="${persona.cemail}"></td>
+				<td th:text="${persona.ctel}"></span>
+				<td><a th:href="@{/editar/} + ${persona.id}" th:text="Editar"></span>
+				<td><a th:href="@{/eliminar/} + ${persona.id}" th:text="Eliminar"></span>
+			</tr>
+		</table>
+	</div>
+	<div th:if="${personas == null  or personas.empty}">
+		[[#{persona.lista.vacia}]]
+	</div>
+	<br />
+	<hr />
+	<br />
+	<footer th:replace="layout/plantilla :: footer" />
+</body>
+
+</html>
