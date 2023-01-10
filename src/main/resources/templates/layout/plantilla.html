@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<title>Plantilla</title>
@@ -23,6 +25,16 @@
 		<span> [[#{plantilla.pie.pagina}]]
 			<a href="http://www.globalmentoring.com.mx" target="blank">GlobalMentoring.com.mx</a>
 		</span>
+		
+		<form method="POST" th:action="@{/logout}">
+			
+			<b>[[#{user.login}]]:</b><span sec:authentication="name">Usuario logueado</span> |
+			<b>[[#{user.rol}]]:</b><span sec:authentication="principal.authorities">Roles</span>
+<!-- 									   <span sec:authentication="principal.authorities">-->
+			<br/>
+			<a href="#" onclick="this.parentNode.submit();">Logout</a>
+			
+		</form>
 	</footer>
 </body>
 

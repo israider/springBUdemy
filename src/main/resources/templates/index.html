@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<title> [[#{index.titulo}]]</title>
@@ -11,7 +13,7 @@
 	<header th:replace="layout/plantilla :: header" />
 	<hr />
 	<br />
-	<a th:href="@{/agregar}">[[#{persona.accion.agrega}]]</a>
+	<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}">[[#{persona.accion.agrega}]]</a>
 	<br />
 	<br />
 	<div th:if="${personas != null  and !personas.empty}">
@@ -23,8 +25,8 @@
 				<th>[[#{persona.apmaterno}]]</th>
 				<th>[[#{persona.email}]]</th>
 				<th>[[#{persona.tel}]]</th>
-				<th>[[#{persona.edita}]]</th>
-				<th>[[#{persona.elimina}]]</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">[[#{persona.edita}]]</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">[[#{persona.elimina}]]</th>
 			</thead>
 			<tr th:each="persona:${personas}">
 				<td th:text="${persona.id}"></td>
@@ -33,8 +35,8 @@
 				<td th:text="${persona.capellidom}"></td>
 				<td th:text="${persona.cemail}"></td>
 				<td th:text="${persona.ctel}"></span>
-				<td><a th:href="@{/editar/} + ${persona.id}" th:text="Editar"></span>
-				<td><a th:href="@{/eliminar/} + ${persona.id}" th:text="Eliminar"></span>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/} + ${persona.id}" th:text="Editar"></span>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar/} + ${persona.id}" th:text="Eliminar"></span>
 			</tr>
 		</table>
 	</div>

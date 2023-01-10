@@ -1,31 +1,29 @@
 package mx.com.gm.web;
 
+import javax.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import mx.com.gm.domain.Persona;
+import mx.com.gm.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
-import mx.com.gm.domain.Persona;
-import mx.com.gm.services.PersonaService;
-
 @Controller
 @Slf4j
 public class ControlardorInicio {
-	
-//	@Value("${index.saludo}")
-//	private String _saludo;
 	
 	@Autowired
 	private PersonaService personaService;
 	
 	@GetMapping("/")
-	public String inicio(Model model) {
+	public String inicio(Model model, @AuthenticationPrincipal User user) {
 		log.info("ejecutando el controlador Spring MVC");
-		
+		log.info("usuario que se logueo: " + user);
 		var personas = personaService.listaPersonas();
 		
 //		model.addAttribute("mensajePba", "Este es un mensaje de prueba de springBoot MVC ");

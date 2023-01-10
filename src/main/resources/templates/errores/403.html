@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title> [[#{index.titulo}]]</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<header th:replace="layout/plantilla :: header" />
+	<div>
+		ACCESO DENEGADO!! no tienes permiso para ver o ejecutar la acción
+		<a th:href="@{/}" >[[#{modifica.persona.regresar}]]</a>
+	</div>
+	
+	<footer th:replace="layout/plantilla :: footer" />
+</body>
+
+</html>
